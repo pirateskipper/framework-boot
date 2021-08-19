@@ -35,6 +35,12 @@ public class TestDefineAnnotation {
           }
          */
         System.out.printf("java.lang.annotation.Annotation is interface:[%s] \n",DefinedAnnotation.class.isInterface());
+
+        // class保留，但是不能听过vm反射获取
+        System.out.println(ScheduleDefine.class.getAnnotation(Schedule.class));
+
+        // 可以通过vm反射获取
+        System.out.println(DefineAnnotation.class.getAnnotation(DefinedAnnotation.class));
     }
 
     @DefinedAnnotation(sort = 1)
