@@ -8,10 +8,17 @@ import java.util.Map;
 /**
  * @author blindskipper
  * @scope 全链路压测、多租户、链路追踪等需要保存链路线程上下文隔离传递场景;局限不能跨application传递
+ * @desc
+ *    1.设置弱引用key:ThreadLocal
+ *    2.map hashcode设置[]
+ *
  */
 public class TestThreadLocal {
 
-    private ThreadLocal<Route> routeThreadLocal = new NamedThreadLocal<Route>("route:"){
+    /**
+     * 是否设置为static
+     */
+    private static ThreadLocal<Route> routeThreadLocal = new NamedThreadLocal<Route>("route:"){
         @Override
         protected Route initialValue() {
             return new Route(0,null,null,null);
@@ -26,11 +33,11 @@ public class TestThreadLocal {
     }
 
     public static void main(String[] args) {
-        TestThreadLocal testThreadLocal = new TestThreadLocal();
-        System.out.println(testThreadLocal.routeThreadLocal.get());
+        System.out.println(routeThreadLocal.get());
+        routeThreadLocal.remove();
     }
 
-    class Route{
+   static class Route{
         private int id;
         private String url;
         private Map<String,String> meteData;
