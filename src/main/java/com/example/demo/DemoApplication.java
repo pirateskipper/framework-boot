@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import ch.qos.logback.classic.LoggerContext;
+import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +14,8 @@ public class DemoApplication {
 
     public static void main(String[] args) {
         log.info("application is started... && QueueLogback configuration....");
+        LoggerContext context = (LoggerContext)LoggerFactory.getILoggerFactory();
+        System.out.println(context.toString());
         SpringApplication.run(DemoApplication.class, args);
     }
 
