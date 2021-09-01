@@ -11,7 +11,7 @@ public class DemoApplication {
     private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
     public static void main(String[] args) {
-        log.info("application is started...");
+        log.info("application is started... && QueueLogback configuration....");
         SpringApplication.run(DemoApplication.class, args);
     }
 
