@@ -27,6 +27,6 @@ public class InterruptedThreadTest extends Thread{
 
         it2.start();
         it2.interrupt();
-      //  it1.start();
+        it1.start();
     }
 }
