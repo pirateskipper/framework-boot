@@ -54,6 +54,12 @@ public class PrintBinaryInt {
             System.out.print(m[i]);
         }
         System.out.println();
+
+        final int[] p = p(arr);
+        for (int i = 0; i < p.length; i++) {
+            System.out.print(p[i]);
+        }
+        System.out.println();
     }
 
     private static void print(int num) {
@@ -87,9 +93,9 @@ public class PrintBinaryInt {
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[j] < arr[i]) {
-                    int low = arr[i];
+                    int temp = arr[i];
                     arr[i] = arr[j];
-                    arr[j] = low;
+                    arr[j] = temp;
                 }
             }
         }
@@ -100,9 +106,9 @@ public class PrintBinaryInt {
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[j] > arr[i]) {
-                    int high = arr[j];
+                    int temp = arr[j];
                     arr[j] = arr[i];
-                    arr[i] = high;
+                    arr[i] = temp;
                 }
             }
         }
@@ -110,11 +116,16 @@ public class PrintBinaryInt {
     }
 
     private static void swap(int[] arr, int i, int j) {
-        int high = arr[j];
+        int temp = arr[j];
         arr[j] = arr[i];
-        arr[i] = high;
+        arr[i] = temp;
     }
 
+    /**
+     * 冒泡
+     * @param arr
+     * @return
+     */
     private static int[] m(int[] arr) {
         for (int i = 0; i < arr.length -1; i++) {
             for (int j = 0; j < arr.length - 1 - i; j++) {
@@ -123,6 +134,22 @@ public class PrintBinaryInt {
                     arr[j+1] = arr[j];
                     arr[j] = temp;
                 }
+            }
+        }
+        return arr;
+    }
+
+    /**
+     * 插入
+     * @param arr
+     * @return
+     */
+    private static int[] p(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1] ; j--) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
         }
         return arr;
