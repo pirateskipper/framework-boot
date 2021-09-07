@@ -12,14 +12,51 @@ public class PipedInputStreamTest {
 
     public static void main(String[] args) throws IOException {
         Sender sender=new Sender();
-        Receiver receiver=new Receiver(); PipedOutputStream out=sender.getOut();
-        PipedInputStream in=receiver.getIn();
+        PipedOutputStream out=sender.getOut();
+
+        Receiver0 receiver = new Receiver0();
+        Receiver1 receiver1 = new Receiver1();
+
+        PipedInputStream in = receiver.getIn();
+        PipedInputStream in1 = receiver1.getIn();
+
         in.connect(out);
+
+        /**
+         * Already connected
+         */
+        in1.connect(out);
+
         new Thread(sender,"sender").start();
         new Thread(receiver,"receiver").start();
     }
 
-    static class Receiver implements Runnable{
+    static class Receiver0 implements Runnable{
+
+        private PipedInputStream in = new PipedInputStream();
+
+        @Override
+        public void run() {
+            readMessageOnce();
+        }
+
+        public void readMessageOnce() {
+            byte[] bytes = new byte[2048];
+            try {
+                int len = in.read(bytes);
+                System.out.printf("%s --receive this message: %s \n", Thread.currentThread().getName(), new String(bytes, 0, len));
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public PipedInputStream getIn() {
+            return in;
+        }
+    }
+
+    static class Receiver1 implements Runnable{
 
         private PipedInputStream in = new PipedInputStream();
 
