@@ -54,7 +54,10 @@ public class SumTest {
 
     private static int sum1(int l, int r){
         Assert.isTrue(l > r,"error");
-        return help[r] - help[l];
+        if (l == 0) {
+            return help[r];
+        }
+        return help[r] - help[l - 1];
     }
 
 }
