@@ -14,6 +14,7 @@ public class SumTest {
 
     /**
      * 二维数组求和
+     * 无比大规模 优于 前缀和数组方式
      * @param arr
      * @return
      */
@@ -32,7 +33,7 @@ public class SumTest {
     }
 
     /**
-     * 前缀和数组求和
+     * 前缀和数组求和(一般)
      * @param arr
      * @return
      */
